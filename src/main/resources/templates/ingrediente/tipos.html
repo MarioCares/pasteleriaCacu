@@ -24,8 +24,37 @@
                 </div>
             </div>
         </nav>
+        <div class="table-container">
+            <table class="table is-bordered is-fullwidth">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="tipo : ${Tipos}">
+                    <td th:text="${tipo.getNombre()}"></td>
+                    <td>
+                        <form th:action="@{/Ingrediente/Tipo/Eliminar}" method="post">
+                            <a class="button is-warning is-light" th:href="@{/Ingrediente/Tipo/{id}/(id=${tipo.getId()})}">
+                                <span class="icon">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </span>
+                            </a>
+                            <input type="hidden" name="id" th:value="${tipo.getId()}"/>
+                            <button type="submit" class="button is-danger">
+                                <span class="icon">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </span>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-
 </section>
 <div th:replace="plantilla :: footer(~{::script})">
     <script type="text/javascript" th:src="@{/js/app.js}"></script>

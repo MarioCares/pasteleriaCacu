@@ -4,19 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ingrediente")
-public class Ingrediente {
+public class IngredienteModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
-    @Column(name = "nombre", nullable = false)
-    private String nombre;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tipo_id", referencedColumnName = "id")
-    private IngredienteTipoModel tipo;
-
 
     public Long getId() {
         return id;
@@ -26,11 +18,34 @@ public class Ingrediente {
         this.id = id;
     }
 
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @ManyToOne
+    private IngredienteTipoModel tipo;
+
+    public IngredienteTipoModel getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(IngredienteTipoModel tipo) {
+        this.tipo = tipo;
+    }
+
+    public IngredienteModel() {
+
+    }
+    public IngredienteModel(Long id, String nombre, IngredienteTipoModel tipo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.tipo = tipo;
     }
 }

@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:fragment="header(titulo, links)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:replace="${titulo}"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <th:block th:replace="${links}" />
 </head>
 <body>
-$END$
+<nav th:fragment="navbar" class="navbar is-transparent is-fixed-top is-info">
+    <div class="navbar-brand">
+        <a class="navbar-item" th:href="@{/}">
+            Pastelería Cacu
+        </a>
+        <div class="navbar-burger" data-target="navbarExampleTransparentExample">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div id="navbarExampleTransparentExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" th:href="@{/}">
+                Inicio
+            </a>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" th:href="@{/Ingrediente}">
+                    Ingredientes
+                </a>
+                <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item" th:href="@{/Ingrediente/Tipo}">
+                        Tipo
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-end">
+        </div>
+    </div>
+</nav>
+
+<footer class="footer" th:fragment="footer(js)" style="padding-bottom: 3rem">
+    <div class="content has-text-centered">
+        <p>
+            <strong>Pastelería Cacu.cl</strong> por <a href="https://mariocares.dev">Mario Cares</a>.<br />
+            El código fuente de la aplicación puedes encontrarlo en
+            <a href="https://github.com/MarioCares/" target="_blank">
+                <span class="icon"><i class="fab fa-github-square"></i></span>
+            </a> y su licencia es
+            <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.es" target="_blank">CC0 1.0</a>
+        </p>
+    </div>
+    <th:block th:replace="${js}" />
+</footer>
 </body>
 </html>

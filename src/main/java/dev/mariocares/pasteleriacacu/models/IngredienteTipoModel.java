@@ -2,14 +2,23 @@ package dev.mariocares.pasteleriacacu.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "ingrediente_tipo")
-public class IngredienteTipo implements Serializable {
+public class IngredienteTipoModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Column
     private String nombre;
@@ -22,12 +31,23 @@ public class IngredienteTipo implements Serializable {
         this.nombre = nombre;
     }
 
-    public Long getId() {
-        return id;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tipo_id")
+    private Set<IngredienteModel> ingredientes;
+
+    public Set<IngredienteModel> getIngredientes() {
+        return ingredientes;
     }
 
-    public void setId(Long id) {
+    public void setIngredientes(Set<IngredienteModel> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    public IngredienteTipoModel(Long id, String nombre) {
         this.id = id;
+        this.nombre = nombre;
     }
 
+    public IngredienteTipoModel() {
+    }
 }

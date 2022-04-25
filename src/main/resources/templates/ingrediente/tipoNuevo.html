@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" class="has-navbar-fixed-top">
+<head th:replace="plantilla :: header(~{::title}, ~{::link})">
+    <title>Nuevo Tipo Ingrediente - PasteleríaCacu.cl</title>
+    <link rel="stylesheet" href="">
 </head>
 <body>
-$END$
+<nav th:replace="plantilla :: navbar"></nav>
+<section class="section">
+    <div class="container content">
+        <nav class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <h1 class="title">Nuevo Tipo de Ingredientes</h1>
+                </div>
+            </div>
+            <div class="level-right"></div>
+        </nav>
+        <form th:action="@{/Ingrediente/Tipo/Nuevo}" th:method="post" th:object="${formData}">
+            <div class="field">
+                <label for="nombre" class="label">Nombre</label>
+                <div class="control">
+                    <input class="input" th:field="*{nombre}" id="nombre">
+                    <p th:if="${#fields.hasErrors('nombre')}" class="help is-danger"
+                       th:text="${#strings.listJoin(#fields.errors('nombre'), ', ')}">
+                    </p>
+                </div>
+            </div>
+            <button type="submit" class="button is-success">Guardar</button>
+        </form>
+    </div>
+</section>
+<div th:replace="plantilla :: footer(~{::script})">
+    <script type="text/javascript" th:src="@{/js/app.js}"></script>
+</div>
 </body>
 </html>
